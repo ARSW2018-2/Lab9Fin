@@ -35,7 +35,9 @@ public class FrasesServicesStub implements CommandLineRunner{
     
     @Override
     public void run(String... args) throws Exception {
+        repository.deleteAll();
         System.out.println("CONECTION TO MONGODB");
+        
     }
     
 }

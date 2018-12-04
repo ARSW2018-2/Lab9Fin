@@ -14,9 +14,17 @@ var Frases = (function () {
                 console.log(error);
             });
     }
-
+    function eraser(){
+        axios.post('/info/era',frase).then(function (response){
+            console.log('save succesfully')
+ 
+        }).catch(function(error){
+                console.log(error);
+            });           
+    }
     return {
-        postFrases: postFrases
+        postFrases: postFrases,
+        eraser:eraser
     
     };
 })();

@@ -52,7 +52,13 @@ public class FrasesAPIController {
             return new ResponseEntity<>("Error",HttpStatus.NOT_FOUND);
         }
     }
-    
+
+        @RequestMapping(method = RequestMethod.GET,value="/era")
+    public void eraserAll() throws Exception{
+
+            services.run("*");
+
+    }
     
     
 }
