@@ -3,24 +3,45 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-var TextControllerModule = (function () {
-    var submitText = function(){
-        var text = document.getElementById("text").value;
-        console.log(text);
-        var callback = {
-            onSuccess: function(){
-                alert("Text created");
-            },
-            onFailed: function(exception){
-                console.log(exception);
-                alert("There is a problem with our servers. We apologize for the inconvince, please try again later"); 
-            }
-        };
-        RestControllerModule.postText(text,callback);
-    };
-    
-    return{
-        submitText: submitText
+var frase;
+var Frases = (function () {
+    function postFrases(){
+        var frase = document.getElementById("x").value;
+        axios.post('/info',frase).then(function (response){
+            console.log('save succesfully')
+ 
+        }).catch(function(error){
+                console.log(error);
+            });
     }
+
+    return {
+        postFrases: postFrases
+    
+    };
 })();
+
+   var Company=(function(){
+
+    var getEmpresa=function(llama){
+    
+    axios.get('/info').then(function (response) {
+            llama.Eraser();
+            console.log(response.data);                
+            llama.exito(response.data);
+          
+        })
+        .catch(function (error) {
+            
+            console.log(error);
+        });
+    };
+    return {
+        getEmpresa:getEmpresa
+    };
+    })(); 
+
+
+
+
 

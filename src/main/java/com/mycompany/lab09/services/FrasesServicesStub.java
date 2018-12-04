@@ -5,28 +5,32 @@
  */
 package com.mycompany.lab09.services;
 
-import com.mycompany.lab09.model.Text;
-import com.mycompany.lab09.model.TextRepository;
+import com.mycompany.lab09.model.Cadena;
+import com.mycompany.lab09.model.CadenaRepository;
+
 import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 
 /**
  *
- * @author 2108310
+ *@author Lanos Camacho Cesar Eduardo
  */
 @Service
-public class TextServicesStub implements CommandLineRunner{
+public class FrasesServicesStub implements CommandLineRunner{
     @Autowired
-    private TextRepository textRepository;
+    private CadenaRepository repository;
     
-    public ArrayList<String> getInfo(){
-        return null;
+    public List<Cadena> getFrases(){
+        List<Cadena> temp=repository.findByFraseStartingWith("");
+        return temp;
     }
     
-    public void postText(String text){
-        textRepository.save(new Text(text));
+    public void postText(String frase){
+        repository.save(new Cadena(frase));
+
     }
     
     @Override

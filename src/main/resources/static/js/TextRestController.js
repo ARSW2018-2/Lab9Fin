@@ -1,22 +1,70 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-var RestControllerModule = (function (){
-    
-    var postText = function (text, callback){
-        axios.post('/info',text)
-            .then(function(){
-                callback.onSuccess();
-            })
-            .catch(function(error){
-                callback.onFailed(error);
-                console.log(error);
-            });
+var ConsultControladorTabla =(function(){
+
+    var MostrarInfo=function(){
+
+        var llamado ={
+
+            exito: function(response){
+
+                var lista="";
+                for(x in response){
+                    if(x.includes("Compania")){
+                        lista =response[x];
+                    }
+                }
+                if(lista==""){
+                    lista=response;
+                }
+                var first=0;
+                var tabla= document.getElementById('tabla');
+                for(property in lista){
+                    var objeto=lista[property];
+                    console.log(property);
+                    if(first==0){
+                        var encabezado =document.createElement('tr');
+                        var m=document.createElement('td');
+                        m.appendChild(document.createTextNode("No"));
+                        encabezado.appendChild(m);
+                        for(nombre in objeto){
+                            var propiedad=document.createElement('td');
+                            propiedad.appendChild(document.createTextNode(nombre));
+                            encabezado.appendChild(propiedad);
+                        }
+                        primero=1;
+                        tabla.appendChild(encabezado);
+                    }
+                    var tr=document.createElement('tr');
+                    var num =document.createElement('td');
+                    num.appendChild(document.createTextNode(property));
+                    
+                    tr.appendChild(num);
+                    for(x in objeto){
+                        var td =document.createElement('td');
+                        var objetosub=objeto[x];
+                        
+                        for(y in objetosub){
+                            console.log(objetosub[y]);
+                            td.appendChild(document.createTextNode(objetosub[y]));
+                        }
+                         
+                        tr.appendChild(td);
+                    }
+                    tabla.append(tr);
+                }
+            },
+            OnFailed: function(exception){
+                console.log(exception);
+                alert("Problema con el servicio.");
+            },
+            Eraser:function(){
+                var ta= document.getElementById('tabla');
+                ta.removeChild(ta.childNodes[0]);  
+            }
+        };
+        
+        Company.getEmpresa(llamado);
     };
-    return {
-        postText: postText
+    return{
+        MostrarInfo:MostrarInfo
     };
 })();
-

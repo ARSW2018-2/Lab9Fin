@@ -5,8 +5,8 @@
  */
 package com.mycompany.lab09.controller;
 
-import com.mycompany.lab09.model.Text;
-import com.mycompany.lab09.services.TextServicesStub;
+import com.mycompany.lab09.model.Cadena;
+import com.mycompany.lab09.services.FrasesServicesStub;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +21,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
- * @author 2108310
+ * @author Lanos Camacho Cesar Eduardo
  */
 @RestController
 @RequestMapping(value= "/info")
-public class TextAPIController {
+public class FrasesAPIController {
     
     @Autowired
-    private TextServicesStub services;
+    private FrasesServicesStub services;
     
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> addText(@RequestBody String text){
@@ -36,9 +36,23 @@ public class TextAPIController {
             services.postText(text);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         } catch (Exception e) {
-            Logger.getLogger(TextAPIController.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(FrasesAPIController.class.getName()).log(Level.SEVERE, null, e);
             return new ResponseEntity<>("Error",HttpStatus.NOT_FOUND);
         }
     }
-    //curl -i -X POST -HContent-Type:application/json -HAccept:application/json http://localhost:8080/info -d 'fdsfdsfdsfds'
+    
+    
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<?> getAllFrases(){
+        try{
+            
+            return new ResponseEntity<>(services.getFrases(),HttpStatus.ACCEPTED);
+        } catch (Exception e) {
+            Logger.getLogger(FrasesAPIController.class.getName()).log(Level.SEVERE, null, e);
+            return new ResponseEntity<>("Error",HttpStatus.NOT_FOUND);
+        }
+    }
+    
+    
+    
 }

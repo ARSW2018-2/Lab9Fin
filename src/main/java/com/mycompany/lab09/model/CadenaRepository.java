@@ -5,12 +5,16 @@
  */
 package com.mycompany.lab09.model;
 
+import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
  *
- * @author 2108310
+ * @author Lanos Camacho Cesar Eduardo
  */
-public interface TextRepository extends MongoRepository<Text, String>{
-    public Text findByIdentifier(String identifier);
+public interface CadenaRepository  extends MongoRepository<Cadena, String> {
+
+    
+    public List<Cadena> findByFraseStartingWith(String regexp);
+
 }

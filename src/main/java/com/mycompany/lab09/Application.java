@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  *
- * @author 2108310
+ * @author Lanos Camacho Cesar Eduardo
  */
 @SpringBootApplication
 public class Application {
